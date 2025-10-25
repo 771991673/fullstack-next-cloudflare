@@ -455,15 +455,28 @@ wrangler d1 export your-app-name --output backup.sql
 **Configure CORS for Direct Uploads:**
 ```bash
 # Create CORS policy file
-echo '[
-  {
-    "AllowedOrigins": ["https://yourdomain.com", "http://localhost:3000"],
-    "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
-    "AllowedHeaders": ["*"],
-    "ExposeHeaders": [],
-    "MaxAgeSeconds": 3000
-  }
-]' > cors.json
+echo '{
+  "rules": [
+    {
+      "allowed": {
+        "origins": ["http://example.com",  "http://localhost:3000"],
+        "methods": ["GET", "HEAD", "PUT", "POST", "DELETE"],
+        "headers": [
+          "Authorization",
+          "Content-Type",
+          "Cache-Control",
+          "X-Requested-With"
+        ]
+      },
+      "exposeHeaders": [
+        "Content-Type",
+        "Content-Length",
+        "Content-Range"
+      ],
+      "maxAgeSeconds": 3600
+    }
+  ]
+}' > cors.json
 
 # Apply CORS policy
 wrangler r2 bucket cors put your-app-bucket --file cors.json
