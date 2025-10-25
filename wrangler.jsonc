@@ -25,7 +25,7 @@
     ],
     "r2_buckets": [
         {
-            "bucket_name": "next-cf-app-bucket",
+            "bucket_name": "your-app-bucket",
             "binding": "next_cf_app_bucket",
             "preview_bucket_name": "next-cf-app-dev-bucket"
         }
